@@ -19,17 +19,19 @@ stages{
         }
 
         stage ('Deployments'){
-            parallel{
-                stage ('Deploy to Staging'){
-                    steps {
-                        sh "cp **/target/*.war /opt/tomcat/webapps"
-                    }
+            stage ('Deploy to Staging'){
+                steps {
+                    sh "cp **/target/*.war /opt/tomcat/webapps"
                 }
+            }
 
-                stage ("Deploy to Production"){
-                    steps {
-                        sh "cp **/target/*.war /opt/tomcat2/webapps"
+            stage ("Deploy to Production"){
+                steps {
+                    timeout(time:5, unit:'DAYS'){
+                    input message:'Approve PRODUCTION Deployment?'
                     }
+                    
+                    sh "cp **/target/*.war /opt/tomcat2/webapps"
                 }
             }
         }
