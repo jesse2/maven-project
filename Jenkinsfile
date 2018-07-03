@@ -22,13 +22,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "cp **/target/*.war http://localhost:8090/opt/tomcat/webapps/*.war"
+                        sh "cp **/target/*.war http://localhost:8090/opt/tomcat/webapps/"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "cp **/target/*.war http://localhost:8091/opt/tomcat2/webapps/*.war"
+                        sh "cp **/target/*.war http://localhost:8091/opt/tomcat2/webapps/"
                     }
                 }
             }
