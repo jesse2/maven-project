@@ -23,7 +23,7 @@ stages{
                 stage ('Deploy to Staging'){
                     steps {
                         sh "whoami"
-                        sh "sudo cp **/target/*.war /opt/tomcat/webapps"
+                        sh "cp **/target/*.war /opt/tomcat/webapps"
                     }
                 }
 
