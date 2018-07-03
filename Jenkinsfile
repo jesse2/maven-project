@@ -24,6 +24,15 @@ stages{
                 steps {
                     sh "cp **/target/*.war /opt/tomcat/webapps"
                 }
+                post {
+                success {
+                    echo 'Code deployed to Stage.'
+                }
+
+                failure {
+                    echo ' Deployment failed.'
+                }
+}
             }
 
             stage ("Deploy to Production"){
@@ -34,6 +43,15 @@ stages{
 
                     sh "cp **/target/*.war /opt/tomcat2/webapps"
                 }
+                post {
+                success {
+                    echo 'Code deployed to Production.'
+                }
+
+                failure {
+                    echo ' Deployment failed.'
+                }
+            }
             }
         
         }
