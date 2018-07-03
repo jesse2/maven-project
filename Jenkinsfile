@@ -18,24 +18,37 @@ stages{
             }
         }
 
-        stages ('Deployments'){
-            
-            stage ('Deploy to Staging'){
-                steps {
-                    sh "cp **/target/*.war /opt/tomcat/webapps"
+        stage ('Deploy to Staging'){
+            steps {
+                sh "cp **/target/*.war /opt/tomcat/webapps"
+            }
+            post {
+                success {
+                    echo 'Code deployed to Stage.'
+                }
+
+                failure {
+                    echo ' Deployment failed.'
                 }
             }
+        }
 
-            stage ("Deploy to Production"){
-                steps {
-                    timeout(time:5, unit:'DAYS'){
+        stage ('Deploy to Production'){
+            steps {
+                timeout(time:5, unit:'DAYS'){
                     input message:'Approve PRODUCTION Deployment?'
                     }
+                sh "cp **/target/*.war /opt/tomcat2/webapps"
+            }
+            post {
+                success {
+                    echo 'Code deployed to Production.'
+                }
 
-                    sh "cp **/target/*.war /opt/tomcat2/webapps"
+                failure {
+                    echo ' Deployment failed.'
                 }
             }
-        
         }
     }
 }
