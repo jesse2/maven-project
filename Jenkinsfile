@@ -32,7 +32,7 @@ stages{
                 failure {
                     echo ' Deployment failed.'
                 }
-}
+                }
             }
 
             stage ("Deploy to Production"){
