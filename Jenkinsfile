@@ -18,8 +18,8 @@ stages{
             }
         }
 
-        stage ('Deployments'){
-            stages{
+        stages ('Deployments'){
+            
             stage ('Deploy to Staging'){
                 steps {
                     sh "cp **/target/*.war /opt/tomcat/webapps"
@@ -35,7 +35,7 @@ stages{
                     sh "cp **/target/*.war /opt/tomcat2/webapps"
                 }
             }
-        }
+        
         }
     }
 }
