@@ -22,7 +22,6 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "whoami"
                         sh "cp **/target/*.war /opt/tomcat/webapps"
                     }
                 }
