@@ -19,6 +19,7 @@ stages{
         }
 
         stage ('Deployments'){
+            stages{
             stage ('Deploy to Staging'){
                 steps {
                     sh "cp **/target/*.war /opt/tomcat/webapps"
@@ -30,10 +31,11 @@ stages{
                     timeout(time:5, unit:'DAYS'){
                     input message:'Approve PRODUCTION Deployment?'
                     }
-                    
+
                     sh "cp **/target/*.war /opt/tomcat2/webapps"
                 }
             }
+        }
         }
     }
 }
